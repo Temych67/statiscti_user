@@ -9,7 +9,7 @@ psycopg2==2.8.4
 PyMuPDF==1.16.10
 pyTelegramBotAPI==3.6.6
 pytz==2019.3
-requests==2.7.0
+requests==2.20.0
 six==1.13.0
 sqlparse==0.3.0
 style==1.1.0
