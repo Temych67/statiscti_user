@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Firts page</title>
+<style type="text/css">
+table {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+  border-collapse: collapse;
+  color: #686461;
+}
+caption {
+  padding: 10px;
+  color: white;
+  background: #8FD4C1;
+  font-size: 18px;
+  text-align: left;
+  font-weight: bold;
+}
+th {
+  border-bottom: 3px solid #B9B29F;
+  padding: 10px;
+  text-align: left;
+}
+td {
+  padding: 10px;
+}
+tr:nth-child(odd) {
+  background: white;
+}
+tr:nth-child(even) {
+  background: #E8E6D1;
+}
+</style>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+
+  <h2 class="pricing-header">List of users:</h2>
+  
+  <!-- List of users by id and email -->
+  		<div class="col-lg-2">	
+  			<table border="1">
+  				<tr>
+  					<th>Id</th>
+  					<th>First name</th>
+  					<th>Last name</th>
+  					<th>Email</th>
+  					<th>Gender</th>
+  					<th>Ip address</th>
+  				</tr>
+				{% for instance  in object %}			
+						<tr><td><a href='{{ instance.get_absolute_url }}'>{{instance.id}}</a></td>
+							<td><a href='{{ instance.get_absolute_url }}'>{{instance.first_name}}</a></td>
+							<td><a href='{{ instance.get_absolute_url }}'>{{instance.last_name}}</a></td>
+							<td><a href='{{ instance.get_absolute_url }}'>{{ instance.email }}</a></td>
+							<td><a href='{{ instance.get_absolute_url }}'>{{instance.gender}}</a></td>
+						<td><a href='{{ instance.get_absolute_url }}'>{{instance.ip_address}}</a></td>
+						</tr>						
+				{% endfor %}	
+			</table>
+		</div>
+	<!-- end list  -->
+
+			<!-- Pagination -->
+			<div class="container">
+			  <div class="row">
+			    <div class="col">
+					{% include 'users_page/snippets/user_pagination.html' with object=object %}	
+					</div>
+				</div>
+			</div>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>User statistic</title>
+
+    {% include 'users_page/base/css.html' %}
+
+  </head>
+  <body>
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-lg-4">   
+    			<a href="/" class="btn btn-lg btn-bd-primary">Back</a>
+		</div>
+  		</div>
+  	</div>
+    {% include 'users_page/base/js.html' %}
+<div class="container">
+  <div class="row">
+  	<div class="col-lg-5">
+	<!-- Diagram Clicks -->
+  		<canvas id="myChart" width="400" height="400"></canvas>
+			<script>
+			var ctx = document.getElementById('myChart').getContext('2d');
+			var myChart = new Chart(ctx, {
+			    type: 'bar',
+			    data: {
+			        labels:  [{% for temp in default_date %}'{{ temp }}'{% if not forloop.last %}, {% endif %}{% endfor %}],
+			        datasets: [{
+			            label: 'Clicks',
+			            data: [{% for temp in clicks %}'{{ temp }}'{% if not forloop.last %}, {% endif %}{% endfor %}],
+			            backgroundColor: [
+			              	'rgba(255, 99, 132, 0.2)',
+			                'rgba(54, 162, 235, 0.2)',
+			                'rgba(255, 206, 86, 0.2)',
+			                'rgba(75, 192, 192, 0.2)',
+			                'rgba(153, 102, 255, 0.2)',
+			                'rgba(255, 159, 64,0.2)',
+			                'rgba(221, 59, 255,0.2)',
+			                'rgba(158, 501, 586,0.2)',
+			                'rgba(150, 158, 56,0.2)',
+			                'rgba(252, 530, 50,0.2)',
+			                'rgba(255, 59, 132,0.2)',
+			                'rgba(95, 151, 65,0.2)',
+			                'rgba(251, 59, 55,0.2)',
+			                'rgba(255, 59, 532,0.2)',
+			                'rgba(95, 151, 54,0.2)',
+			                'rgba(251, 59, 25,0.2)',
+			                'rgba(158, 56, 95,0.2)',
+			                'rgba(158, 251, 586,0.2)',
+			                'rgba(560, 158, 56,0.2)',
+			                'rgba(252, 150, 50,0.2)',
+			                'rgba(255, 59, 152,0.2)',
+			                'rgba(95, 175, 65,0.2)',
+			                'rgba(251, 59, 255,0.2)',
+			                'rgba(151, 59, 255,0.2)',
+			            ],
+			            borderColor: [
+			                'rgba(255, 99, 132, 1)',
+			                'rgba(54, 162, 235, 1)',
+			                'rgba(255, 206, 86, 1)',
+			                'rgba(75, 192, 192, 1)',
+			                'rgba(153, 102, 255, 1)',
+			                'rgba(255, 159, 64, 1)',
+			           	    'rgba(221, 99, 255,1)',
+			                'rgba(128, 86, 95, 1)',
+			                'rgba(128, 201, 186, 1)',
+			                'rgba(160, 158, 26, 1)',
+			                'rgba(222, 130, 50, 1)',
+			                'rgba(255, 99, 132, 1)',
+			                'rgba(97, 171, 64, 1)',
+			                'rgba(221, 99, 255,1)',
+			                'rgba(255, 99, 132, 1)',
+			                'rgba(97, 171, 64, 1)',
+			                'rgba(221, 99, 255,1)',
+			                'rgba(128, 86, 95, 1)',
+			                'rgba(128, 201, 186, 1)',
+			                'rgba(160, 158, 26, 1)',
+			                'rgba(222, 130, 50, 1)',
+			                'rgba(255, 99, 132, 1)',
+			                'rgba(97, 171, 64, 1)',
+			                'rgba(221, 99, 255,1)',
+			            ],
+			            borderWidth: 1
+			        }]
+			    },
+			    options: {
+			        scales: {
+			            yAxes: [{
+			                ticks: {
+			                    beginAtZero: true
+			                }
+			            }]
+			        }
+			    }
+			});
+			</script>
+  	</div>
+		<!-- Diagram Views -->
+<div class="col-lg-5">
+		<canvas id="myChart2" width="400" height="400"></canvas>
+			<script>
+			var ctx2 = document.getElementById('myChart2').getContext('2d');
+			var myChart2 = new Chart(ctx2, {
+			    type: 'bar',
+			    data: {
+			        labels:  [{% for temp in default_date %}'{{ temp }}'{% if not forloop.last %}, {% endif %}{% endfor %}],
+			        datasets: [{
+			            label: 'Page views',
+			            data: [{% for temp in page_views %}'{{ temp }}'{% if not forloop.last %}, {% endif %}{% endfor %}],
+			            backgroundColor: [
+			                'rgba(128, 86, 95)',
+			                'rgba(128, 201, 186)',
+			                'rgba(160, 158, 26)',
+			                'rgba(222, 130, 50)',
+			                'rgba(255, 99, 132)',
+			                'rgba(97, 171, 64)',
+			                'rgba(221, 59, 255)',
+			                'rgba(158, 501, 586)',
+			                'rgba(150, 158, 56)',
+			                'rgba(252, 530, 50)',
+			                'rgba(255, 59, 132)',
+			                'rgba(95, 151, 65)',
+			                'rgba(251, 59, 55)',
+			                'rgba(255, 59, 532)',
+			                'rgba(95, 151, 54)',
+			                'rgba(251, 59, 25)',
+			                'rgba(158, 56, 95)',
+			                'rgba(158, 251, 586)',
+			                'rgba(560, 158, 56)',
+			                'rgba(252, 150, 50)',
+			                'rgba(255, 59, 152)',
+			                'rgba(95, 175, 65)',
+			                'rgba(251, 59, 255)',
+			                'rgba(151, 59, 255)',
+			            ],
+			            borderColor: [
+			                'rgba(128, 86, 95, 1)',
+			                'rgba(128, 201, 186, 1)',
+			                'rgba(160, 158, 26, 1)',
+			                'rgba(222, 130, 50, 1)',
+			                'rgba(255, 99, 132, 1)',
+			                'rgba(97, 171, 64, 1)',
+			                'rgba(221, 99, 255,1)',
+			                'rgba(128, 86, 95, 1)',
+			                'rgba(128, 201, 186, 1)',
+			                'rgba(160, 158, 26, 1)',
+			                'rgba(222, 130, 50, 1)',
+			                'rgba(255, 99, 132, 1)',
+			                'rgba(97, 171, 64, 1)',
+			                'rgba(221, 99, 255,1)',
+			                'rgba(255, 99, 132, 1)',
+			                'rgba(97, 171, 64, 1)',
+			                'rgba(221, 99, 255,1)',
+			                'rgba(128, 86, 95, 1)',
+			                'rgba(128, 201, 186, 1)',
+			                'rgba(160, 158, 26, 1)',
+			                'rgba(222, 130, 50, 1)',
+			                'rgba(255, 99, 132, 1)',
+			                'rgba(97, 171, 64, 1)',
+			                'rgba(221, 99, 255,1)',
+			            ],
+			            borderWidth: 1
+			        }]
+			    },
+			    options: {
+			        scales: {
+			            yAxes: [{
+			                ticks: {
+			                    beginAtZero: true
+			                }
+			            }]
+			        }
+			    }
+			});
+			</script>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<form method="GET">
+	          <div class="form-group col-md-2 col-lg-2">
+	            <label for="publishDateMin">From</label>
+	            <input type="date" class="form-control" id="publishDateMin" name="date_min">
+	          </div>
+	          <div class="form-group col-md-2 col-lg-2">
+	            <label for="publishDateMax">To</label>
+	            <input type="date" class="form-control" id="publishDateMax" name="date_max">
+	          </div> 
+         </div>  
+     </div> 
+				<div class="row">
+				     <div class="col-lg-4">   
+			    			<button type="submit" class="btn btn-primary">Search</button>
+					</div>
+				</div>
+     	 </form>
+
+</div>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<h2>Total clicks: {{total_clicks}}</h2>
+			</div>
+			<div class="col">
+				<h2>Total pages views: {{total_page_views}}</h2>
+			</div>
+		</div>
+	</div>
+      
+  </body>
+</html>
