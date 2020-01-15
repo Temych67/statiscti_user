@@ -38,40 +38,40 @@ def user_detail_view(request, id):
 		# Sorting by for(date_min) to(date_max)
 		date_min = request.GET.get('date_min')
 		if is_valid_queryparam(date_min):
-			proverka = date_min
 			qs_count = qs_count.filter(date__gte=date_min)
 
 		date_max = request.GET.get('date_max')
 		if is_valid_queryparam(date_max):
 			qs_count = qs_count.filter(date__lt=date_max)
+		
 		if  date_min == '' and date_max == '':
 			qs_count = qs_count.filter(date__gte=datetime(2019,10,24))
-
-		for temp in qs_count.values_list('date'):
-			default_date.append(temp[0])
-		for temp in qs_count.values_list('clicks'):
-			clicks.append(temp[0])
-			total_clicks += temp[0]
-		for temp in qs_count.values_list('page_views'):
-			page_views.append(temp[0])
-			total_page_views += temp[0]
+			
+		default_date		= qs_count.values_list('date', flat=True)
+		clicks 				= qs_count.values_list('clicks', flat=True)
+		page_views 			= qs_count.values_list('page_views', flat=True)
+		
+		for temp in clicks:
+			total_clicks += temp
+		for temp in page_views:
+			total_page_views += temp
 	
 	 #Defualt date 
 	else:
-		for temp in qs_count.values_list('date').filter(date__gte=datetime(2019,10,24)):
-			default_date.append(temp[0])
-		for temp in qs_count.values_list('clicks').filter(date__gte=datetime(2019,10,24)):
-			clicks.append(temp[0])
-			total_clicks += temp[0]
-		for temp in qs_count.values_list('page_views').filter(date__gte=datetime(2019,10,24)):
-			page_views.append(temp[0])
-			total_page_views += temp[0]
+		default_date 	= qs_count.values_list('date',flat=True).filter(date__gte=datetime(2019,10,24))
+		clicks 			= qs_count.values_list('clicks',flat=True).filter(date__gte=datetime(2019,10,24))
+		page_views 		= qs_count.values_list('page_views',flat=True).filter(date__gte=datetime(2019,10,24))
+		
+		for temp in clicks:
+			total_clicks += temp
+		for temp in page_views:
+			total_page_views += temp
 
 	context = {
 		"total_page_views":total_page_views,
 		"total_clicks":total_clicks,
 		"default_date":default_date,
 		"clicks":clicks,
-		"page_views":page_views
+		"page_views":page_views,
 	}
 	return render(request, "users_page/user_detail.html", context)
